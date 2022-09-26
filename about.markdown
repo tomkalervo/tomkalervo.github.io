@@ -3,12 +3,12 @@ layout: page
 title: About
 permalink: /about/
 ---
-## Tom Karlsson
+# Address
 _Blommensbergsv. 188_
 _Stockholm, Sweden_
-
+# Phone
 _(+46) 735-310-three four zero_
-
+# E-mail
 _tom.kg.karlsson(at)gmail.com_
 
 # Programming langugages

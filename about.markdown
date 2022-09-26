@@ -11,6 +11,25 @@ _(+46) 735-310-three four zero_
 
 _tom.kg.karlsson(at)gmail.com_
 
+# Programming langugages
+- C
+- C++
+- C#
+- Elixir
+- Java
+- Prolog
+
+# General skills
+- Git
+- Agile workmethods
+- Unix / Linux
+
+# Math
+- Calculus
+- Statistics & probabillity
+- Linear algebra
+- Logic / Formal methods
+
 # Shortest possible resume 
 **2020-08 to present**
 Master of Science in Information Technology at

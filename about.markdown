@@ -3,44 +3,18 @@ layout: page
 title: About
 permalink: /about/
 ---
-# Address
-_Blommensbergsv. 188_
-_Stockholm, Sweden_
-# Phone
-_(+46) 735-310-three four zero_
-# E-mail
-_tom.kg.karlsson(at)gmail.com_
 
-# Programming langugages
-- C
-- C++
-- C#
-- Elixir
-- Java
-- Prolog
+# Contact
+4dress:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Blommensbergsv. 188_
+            _Stockholm, Sweden_
 
-# General skills
-- Git
-- Agile workmethods
-- Unix / Linux
+Teleph0ne:&nbsp;&nbsp;&nbsp;_(+46) 735-310-three four zero_
 
-# Math
-- Calculus
-- Statistics & probabillity
-- Linear algebra
-- Logic / Formal methods
+E-mai1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_tom.kg.karlsson(at)gmail.com_
 
-# Shortest possible resume 
-**2020-08 to present**
-Master of Science in Information Technology at
-[KTH] Royal Institute of Technology, Stockholm.
+# My story
+I have always had a passion for computers growing up and I was indulged by the Internet when exposed to it in the 90's. But I never actually saw it as a career choice growing up. So I ended up working with media and journalism for ten years. A most educational experience - but my will to get back into technical science grew too strong. Now I am more motivated than I have ever been, to study harder than I ever have done before - with the goal to work with my true passions; Computer Science and Information Technology.
 
-**2009-2020**
-Running my own business in media production. I produced films and media to fit customers needs.
+Some of my other hobbies and interests are nature(wildlife), news and political news. I read alot of morning papers, magazines and online articles. My media career involved news gathering at Swedish Television and I have even produced two documenteraries, both more or less about birds or people passionate about birds. I really enjoy beeing outdoors in the wild and experience the nature in all its elements.
 
-**2006-2009**
-Bachelors degree in journalism & media production at
-Linneus University, Kalmar.
-
-
-[KTH]: https://www.kth.se/en
+I live in Stockholm, Sweden, since 6 years back together with my girlfriend. Before that I lived 8 years in the town Kalmar in south of sweden. But I grew up in antoher town, Vanersborg, at the west coast. This means I have family and friends spread around larger parts of the country.

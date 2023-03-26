@@ -4,7 +4,7 @@ title: Unix Commands
 permalink: /Unix/
 ---
 
-Here I list useful commands for unix / macOS.
+From time to time I come across usefull terminal-commands. To remeber them I save them here. Maybe someone else might finds it usefull as well. These are unix-commands since I mainly do work on macOS.
 
 ```zsh
 tomkarlsson@Toms-MBP ~ % shasum -a 256 filename

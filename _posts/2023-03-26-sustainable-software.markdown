@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Software is not sustainable"
-date:   2023-02-08 16:30:46 +0200
+date:   2023-03-26 16:30:46 +0200
 categories: blog
 ---
 

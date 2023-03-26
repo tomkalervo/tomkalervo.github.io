@@ -48,11 +48,14 @@ Bachelors degree in journalism & media production at
 Linneus University, Kalmar.
 
 #### Certificates
-<iframe title="Problem Solving Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
-
-<iframe title="Java Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
+[Problem Solving at Hackerrank]
+<iframe title="Problem Solving Basic" width="100%" height="600px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
+[Java at Hackerrank]
+<iframe title="Java Basic" width="100%" height="600px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
 "> </iframe>
 
 [KTH]: https://www.kth.se/en
 [Ecogain]: https://www.ecogain.se
 [Fryda]: https://www.fryda.life
+[Problem Solving at Hackerrank]: https://www.hackerrank.com/certificates/62ce7c32783a
+[Java at Hackerrank]: https://www.hackerrank.com/certificates/cf1cfc22a839

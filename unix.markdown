@@ -5,33 +5,9 @@ permalink: /Unix/
 ---
 
 Here I list useful commands for unix / macOS.
-# console
-{% highlight console %}
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
 
-{% endhighlight %}
-
-```console
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
-
+```zsh
+tomkarlsson@Toms-MBP ~ % shasum -a 256 filename
+8de4bab1ab5424707f94f3a4f0690061fce9807d57f132245ca06da6fed96a5e  filename
 ```
-# shell
-{% highlight shell %}
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
-
-{% endhighlight %}
-
-```shell
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
-
-```
-# bash
-{% highlight bash %}
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
-
-{% endhighlight %}
-
-```bash
-tomkarlsson@Toms-MBP ~ % shasum -a 256 text.txt
-
-```
+Gets the 'Secure Hash Algorithm Sum'. Switch out 256 for different algorithms. 

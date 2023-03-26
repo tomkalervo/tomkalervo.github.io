@@ -7,11 +7,14 @@ permalink: /studies/
 I am pursuing a [Master of Science in Information Technology] at Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
 
 ### Ongoing courses
+- Bachelor Degree Project - IA150X, 15 hp
+- Introduction to Computer Security - IV1013, 7.5 hp
+
+### Completed courses (in order of completion)
+- Digitalisation and Innovation for Sustainable Development - AL1523, 7.5 hp
 - Operating Systems - ID1206, 7.5 hp
 - Network Programming - ID1212, 7.5 hp
 - Algorithms, Data Structures and Complexity - DD2350, 9.5 hp
-
-### Completed courses (in order of completion)
 - Probability Theory and Statistics - SF1912, 6.0 hp
 - Modern Software Development - IV1303, 6.0 hp
 - Project in Information and Communication Technology - II1305, 7.5 hp

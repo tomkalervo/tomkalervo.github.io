@@ -20,6 +20,6 @@ Lice-Cycle Assessment, (LCA),  is a common framework, standardized by ISO, to me
 # Software in specific
 It is not as easy to picture the impact on sustainability from software. What first comes to mind is energy-efficient code (or algorithm-design). This is true, the more frequent a software is used, the more energy there is to save with clever algorithms and design. If heavy on network-traffic, a cache might decrease network traffic, and thus also energy consumption. 
 
-But the aspects I find most interesting is to develop code that prolongs the life of hardware. Let?s not forget that it is the development of new software that makes ?old? hardware obsolete. Far too often does new updates stop supporting older hardware. This creates an unnecessary consumption of hardware - directly shortens the lifespan of products. Here lies a major responsibility for software developers to continue to support older devices.
+But the aspects I find most interesting is to develop code that prolongs the life of hardware. Let?s not forget that it is the development of new software that makes \?old\? hardware obsolete. Far too often does new updates stop supporting older hardware. This creates an unnecessary consumption of hardware - directly shortens the lifespan of products. Here lies a major responsibility for software developers to continue to support older devices.
 
 [Brundtland]: https://en.wikipedia.org/wiki/Brundtland_Commission

@@ -27,12 +27,6 @@ permalink: /cv/
 - Linear algebra
 - Logic / Formal methods
 
-#### Certificates
-<iframe title="Problem Solving Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
-
-<iframe title="Java Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
-"> </iframe>
-
 #### Shortest possible resume 
 **2020-08 to present**
 Master of Science in Information Technology at
@@ -53,6 +47,11 @@ Running my own business in media production. I produced films and media to fit c
 Bachelors degree in journalism & media production at
 Linneus University, Kalmar.
 
+#### Certificates
+<iframe title="Problem Solving Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
+
+<iframe title="Java Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
+"> </iframe>
 
 [KTH]: https://www.kth.se/en
 [Ecogain]: https://www.ecogain.se

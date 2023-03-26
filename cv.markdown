@@ -28,8 +28,9 @@ permalink: /cv/
 - Logic / Formal methods
 
 #### Certificates
-<iframe title="Problem Solving Basic" width="100%" height="600px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
-<iframe title="Java Basic" width="100%" height="600px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
+<iframe title="Problem Solving Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/62ce7c32783a"> </iframe>
+
+<iframe title="Java Basic" width="100%" height="200px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
 "> </iframe>
 
 #### Shortest possible resume 

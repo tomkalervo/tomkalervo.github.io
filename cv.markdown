@@ -5,6 +5,7 @@ permalink: /cv/
 ---
 
 #### Programming langugages
+- Cobol
 - C
 - C++
 - C#
@@ -14,6 +15,7 @@ permalink: /cv/
 - Python
 
 #### General skills
+- z/OS
 - Git
 - Agile workmethods
 - Unix / Linux
@@ -24,17 +26,22 @@ permalink: /cv/
 #### Math
 - Calculus
 - Statistics & probabillity
+- Discrete math
 - Linear algebra
 - Logic / Formal methods
 
 #### Shortest possible resume 
-**2020-08 to present**
-Master of Science in Information Technology at
+**2023-09-21 to present**
+System Developer at [Svenska Handelsbanken]. Working with mainframe system z/OS and do Cobol programming.
+
+**2020-08 to 2023-06-04**
+Batchelor of Science in Information- and Communication Technology at
 [KTH] Royal Institute of Technology, Stockholm.
 
 **2023-01-16 to 2023-06-04**
-Bachelor thesis: RDF framwork for Biodiversity assessment data. RDF is a framwork to enable the semantic web, open searchable data. Standards for metadata and biodiversity exists today, but there is no framework to handle biodiversity assessments and surveys. If this data also can be used through the existing standards it would enable great insight into ecosystems, nature and wildlife. 
-At company [Ecogain]
+Bachelor thesis: [Unlocking the Potential of Biodiversity Data: Managing and Sharing Data from Biodiversity Surveys].
+ 
+ Abstract: Biodiversity surveys conducted by consulting firms generate valuable biodiversity data. However, the full potential of this data remains untapped without proper structuring and integration into a collaborative network of shared data. This thesis addresses the lack of studies exploring data management in biodiversity surveys and the specific requirements for data structuring. The objective of this Bachelor?s thesis is to introduce the concepts of data management in biodiversity surveys and collaborative data sharing, which have gained scientific popularity due to advancements in data-driven technologies and growing public interest in environmental sustainability. Using a qualitative and exploratory approach based on the Design Science Research paradigm, this research draws general conclusions on data management practices in biodiversity surveys and identifies the requirements for new data standards. The findings of this thesis serve as a starting point for ongoing efforts toward establishing a standardised structure for biodiversity survey data. Such a structure would enable meaningful insights through data-driven technologies and facilitate integration into a collaborative network of shared data. By addressing the gap in understanding data management and data standards in biodiversity surveys, this research contributes to the effective utilization of biodiversity data, ultimately supporting the achievement of sustainability goals.
 
 **2023-01-16 to 2023-03-18**
 Developed API (with Python) for Business Intelligence Interface to connect to Google BigQuery.
@@ -54,6 +61,8 @@ Linneus University, Kalmar.
 <iframe title="Java Basic" width="100%" height="600px" src="https://www.hackerrank.com/certificates/iframe/cf1cfc22a839
 "> </iframe>
 
+[Unlocking the Potential of Biodiversity Data: Managing and Sharing Data from Biodiversity Surveys]: https://lnkd.in/d_HTXYNQ
+[Svenska Handelsbanken]: https://www.handelsbanken.com/en/about-the-group/our-story
 [KTH]: https://www.kth.se/en
 [Ecogain]: https://www.ecogain.se
 [Fryda]: https://www.fryda.life

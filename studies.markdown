@@ -4,13 +4,11 @@ title: Studies
 permalink: /studies/
 ---
 
-I am pursuing a [Master of Science in Information Technology] at Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
+I have a Batchelor of Science Degree at Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
 
-### Ongoing courses
+### Completed courses (in order of completion) of Batchelor Degree
 - Bachelor Degree Project - IA150X, 15 hp
 - Introduction to Computer Security - IV1013, 7.5 hp
-
-### Completed courses (in order of completion)
 - Digitalisation and Innovation for Sustainable Development - AL1523, 7.5 hp
 - Operating Systems - ID1206, 7.5 hp
 - Network Programming - ID1212, 7.5 hp
@@ -34,6 +32,3 @@ I am pursuing a [Master of Science in Information Technology] at Kungliga Teknis
 - Basic Course in Mathematics - SF1689,6.0 hp
 - Digital Design - IE1204, 7.5 hp
 - Introduction to IT - II1306, 1.5 hp
-
-
-[Master of Science in Information Technology]: https://www.kth.se/utbildning/civilingenjor/informationsteknik?code=CINTE

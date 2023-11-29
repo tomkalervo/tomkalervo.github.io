@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "AOC - Preparing Python"
-date:   2023-08-29 21:13:46 +0200
+date:   2023-11-29 22:15:46 +0200
 categories: blog
 ---
 

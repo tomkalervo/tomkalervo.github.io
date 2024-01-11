@@ -25,7 +25,7 @@ $$ n_{0} = 0 $$
 $$ n_{1} = 1 $$
 </div>
 
-Becursive case:
+Recursive case:
 <div>
 $$ n_{i} = n_{i-1} + n_{i-2} $$
 </div> 

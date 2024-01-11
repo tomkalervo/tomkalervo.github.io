@@ -4,6 +4,9 @@ title:  "WebAssembly - Connecting Ends"
 date:   2024-01-11 20:39:00 +0200
 categories: blog
 ---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 I made my first WebAssembly implementation, exploring two fibonacci-calculating-functions. It can be viewed at [From C to Wasm, Fibonacci].
 
 # Why I Wanted to Learn WebAssembly
@@ -15,14 +18,18 @@ I recently finished a course on coursera regarding [Discret Optimization]. In th
 
 # Fibonacci in c
 To start off I wrote two c-functions to calculate a fibonacci-value. Fibonacci is a squence of *n* integers. It is formulated recursivly: 
+
+Basecases:
 <div>
-<p>Basecase: </br>
-$$ n_{0} = 0 $$ 
+$$ n_{0} = 0 $$
+</div>
+<div> 
 $$ n_{1} = 1 $$
-</p>
-<p>Becursive case: <br/>
+</div>
+
+Becursive case:
+<div>
 $$ n_{i} = n_{i-1} + n_{i-2} $$
-</p>
 </div> 
 
 So the first function implemented in C follows the recursive formula:

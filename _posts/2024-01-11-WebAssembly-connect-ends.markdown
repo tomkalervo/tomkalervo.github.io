@@ -17,13 +17,11 @@ I recently finished a course on coursera regarding [Discret Optimization]. In th
 >WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications. [Source]
 
 # Fibonacci in c
-To start off I wrote two c-functions to calculate a fibonacci-value. Fibonacci is a squence of *n* integers. It is formulated recursivly: 
+To start off I wrote two c-functions to calculate a fibonacci-value. Fibonacci is a squence of *n* integers. It may be defined by the following recursive relation: 
 
-Basecases:
+Basecase(s):
 <div>
 $$ n_{0} = 0 $$
-</div>
-<div> 
 $$ n_{1} = 1 $$
 </div>
 

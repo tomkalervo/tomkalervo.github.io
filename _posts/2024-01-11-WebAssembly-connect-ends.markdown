@@ -71,7 +71,8 @@ tomkarlsson@Toms-MBP ~ %  emcc fib.c -o fib.js
 
 It will produce a `fib.wasm` file and a `fib.js` file. The `.js` contains javascript that loads the `.wasm` file. To fully understand how to link the .wasm with javascript I decided to write my own HTML with inline javascript. Due to the nature of the two C functions having different timecomplexity (linear vs exponential) I also added a javascript timing-snippet to display the time it took to execute each function.
 
-The HTML code, as well as the C code, can be found in my github-repo [my_wasm/fib/] - But! The awesomeness of Wasm now also make this little project interactable, -> [From C to Wasm, Fibonacci] <-
+The HTML code, as well as the C code, can be found in my github-repo [my_wasm/fib/] - But! The awesomeness of Wasm now also make this little project interactable; 
+<div style="text-align: center;">-> [From C to Wasm, Fibonacci] <-</div>
 
 [Source]: https://webassembly.org
 [Discret Optimization]: https://www.coursera.org/learn/discrete-optimization

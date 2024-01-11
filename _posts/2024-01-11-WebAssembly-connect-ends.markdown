@@ -18,13 +18,19 @@ To start off I wrote two c-functions to calculate a fibonacci-value. Fibonacci i
 
 > Basecase: 
 
-> > $$n_{0} = 0$$
+> > $$
+> n_{0} = 0
+> $$
 
-> > $$n_{1} = 1$$
+> > $$
+> n_{1} = 1
+> $$
 
 > Becursive case:
 
-> $$n_{i} = n_{i-1} + n_{i-2}$$ 
+> > $$
+> n_{i} = n_{i-1} + n_{i-2}
+> $$ 
 
 So the first function implemented in C follows the recursive formula:
 

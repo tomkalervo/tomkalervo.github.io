@@ -62,7 +62,7 @@ long fib_dynamic_programming(int n) {
 }
 {% endhighlight %}
 
-# c in Wasm
+# C in Wasm
 To compile the c-code into wasm I conveniently used Brew on my mac. This installed [Emscripten], that can be run from the terminal command emcc.
 
 ```zsh

@@ -9,11 +9,11 @@ categories: blog
 
 Fresh from completing a MOOC on [Discrete Optimization](https://www.coursera.org/learn/discrete-optimization) offered by Coursera, I find myself equipped with a solid foundation in understanding concepts and techniques for solving optimization problems.
 
-This newfound knowledge fueled my exploration into the complexities of the Traveling Salesman Problem (TSP). Along this journey, I unearthed intriguing techniques, with Linear Programming (LP) taking center stage. In the following blog post, I'll unravel my insights into leveraging LP for achieving linear relaxation in the context of TSP.
+ One intriguing technique is Linear Programming (LP). So, in the following blog post, I'll discuss my insights into leveraging LP for achieving linear relaxation in the context of TSP.
 
 ## The TSP Conundrum
 
-The TSP, a classic optimization challenge, tasks us with finding the shortest path that visits each node exactly once. This problem is no walk in the park; it's NP-complete, meaning there's no guaranteed speedy algorithm to find an optimal solution as the problem size grows. 
+The Traveling Salesman Problem (TSP), a classic optimization challenge, tasks us with finding the shortest path that visits each node exactly once. This problem is no walk in the park... :D ...it's NP-complete, meaning there's no guaranteed speedy algorithm to find an optimal solution as the problem size grows. 
 
 ## Linear Relaxation to the Rescue
 
@@ -21,9 +21,9 @@ To tackle the complexity of TSP, one approach is to leverage Linear Programming.
 
 ## Insights from the Implementation
 
-In a recent exploration, I delved into implementing an LP-based solution using Google OR-Tools. The notebook I created walks through the intricacies, from generating a graph to visualizing the obtained solutions. I found this approach not only insightful but also a stepping stone for further refinements.
+In a recent exploration, I delved into implementing an LP-based solution using Google OR-Tools. During the course at coursera I did implement my own LP using the simplex method. But it was more for learning purposes than for actuall usage. The notebook I created walks through the intricacies, from generating a graph to visualizing the obtained solutions. I found this approach not only insightful but also a stepping stone for further refinements.
 
-If you're curious about the implementation details, branching strategies, and the visualization of the solutions, I invite you to dive into the notebook. You can find it [here](https://github.com/tomkalervo/demos/blob/main/TSP.ipynb).
+If you're curious about the implementation details, branching strategies, and the visualization of the solutions, I invite you to check out the notebook. You can find it [here](https://github.com/tomkalervo/demos/blob/main/TSP.ipynb).
 
 ## Conclusion
 

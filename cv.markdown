@@ -22,6 +22,9 @@ permalink: /cv/
 - Unity
 - Matlab
 - LaTeX
+- Jupyter Notebook
+- Optimization problem solving
+- Machine Learning implementation
 
 #### Math
 - Calculus
@@ -31,6 +34,9 @@ permalink: /cv/
 - Logic / Formal methods
 
 #### Shortest possible resume 
+**2023-10-11 to 2024-01-11**
+Online course, MOOC, in [Discrete Optimization](https://www.coursera.org/learn/discrete-optimization) at Coursera. View [Certificate](https://coursera.org/share/13508a393bcd88dc5a1f07281b6309fc).
+
 **2023-09-21 to present**
 System Developer at [Svenska Handelsbanken]. Working with mainframe system z/OS and do Cobol programming.
 

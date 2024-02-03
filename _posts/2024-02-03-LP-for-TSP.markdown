@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "Linear Relaxation for Traveling Salesman Problem (TSP)"
+date:   2024-02-03 22:37:00 +0200
+categories: blog
+---
+
+# Navigating the World of Optimization: A Dive into Linear Relaxation
+
+Fresh from completing a MOOC on [Discrete Optimization](https://www.coursera.org/learn/discrete-optimization) offered by Coursera, I find myself equipped with a solid foundation in understanding concepts and techniques for solving optimization problems.
+
+This newfound knowledge fueled my exploration into the complexities of the Traveling Salesman Problem (TSP). Along this journey, I unearthed intriguing techniques, with Linear Programming (LP) taking center stage. In the following blog post, I'll unravel my insights into leveraging LP for achieving linear relaxation in the context of TSP.
+
+## The TSP Conundrum
+
+The TSP, a classic optimization challenge, tasks us with finding the shortest path that visits each node exactly once. This problem is no walk in the park; it's NP-complete, meaning there's no guaranteed speedy algorithm to find an optimal solution as the problem size grows. 
+
+## Linear Relaxation to the Rescue
+
+To tackle the complexity of TSP, one approach is to leverage Linear Programming. LP allows us to relax binary constraints on decision variables, allowing real-valued solutions. Though these solutions might not be integers, they serve as an efficient upper bound for the optimization problem.
+
+## Insights from the Implementation
+
+In a recent exploration, I delved into implementing an LP-based solution using Google OR-Tools. The notebook I created walks through the intricacies, from generating a graph to visualizing the obtained solutions. I found this approach not only insightful but also a stepping stone for further refinements.
+
+If you're curious about the implementation details, branching strategies, and the visualization of the solutions, I invite you to dive into the notebook. You can find it [here](https://github.com/tomkalervo/demos/blob/main/TSP.ipynb).
+
+## Conclusion
+
+Linear relaxation emerges as a powerful tool in the arsenal of solving combinatorial optimization problems. It not only provides a pragmatic upper bound but also lays the groundwork for iterative improvements. Tackling TSP with LP has been an enlightening journey, and I'm excited to see where this exploration leads next.
+
+Happy optimizing!

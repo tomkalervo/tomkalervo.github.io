@@ -1,10 +1,10 @@
 ---
 layout: page
 title: My Unix Commands
-permalink: /my_notes/my_unix/
+permalink: /my_unix/
 ---
 
-Nice to remember terminal commands on the MacOS.
+Nice to remember terminal stuff on the MacOS.
 
 ```zsh
 tomkarlsson@Toms-MBP ~ % shasum -a 256 filename

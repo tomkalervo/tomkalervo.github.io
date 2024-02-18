@@ -4,8 +4,9 @@ title: My Machine Learning Notes
 permalink: /my_ml/
 ---
 
-Nice to know (remember) python libraries and their functions.
-Numpy, Pandas, Scikit learn, Tensorflow.
+Nice to know (remember) python libraries and their functions, used to build & train succesfull machine learning models.
+
+Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.  
 
 ### TOPICS TO COVER
 

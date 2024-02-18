@@ -5,7 +5,6 @@ permalink: /cv/
 ---
 
 #### Programming langugages
-- Cobol
 - C
 - C++
 - C#
@@ -13,13 +12,15 @@ permalink: /cv/
 - Java
 - Prolog
 - Python
+- SQL
+- Cobol
 
 #### General skills
-- z/OS
 - Git
+- Data management
 - Agile workmethods
 - Unix / Linux
-- Unity
+- z/OS
 - Matlab
 - LaTeX
 - Jupyter Notebook
@@ -27,18 +28,21 @@ permalink: /cv/
 - Machine Learning implementation
 
 #### Math
-- Calculus
+- Calculus (multi variable)
 - Statistics & probabillity
 - Discrete math
 - Linear algebra
 - Logic / Formal methods
 
 #### Shortest possible resume 
+**2023-01-14 to 2024-02-14**
+Online course, MOOC, in [Machine Learning](https://www.coursera.org/specializations/machine-learning-introduction) at Coursera. View [Certificate](https://coursera.org/share/ce82274ff3b824a9d9f15bdbe9384806)
+
 **2023-10-11 to 2024-01-11**
 Online course, MOOC, in [Discrete Optimization](https://www.coursera.org/learn/discrete-optimization) at Coursera. View [Certificate](https://coursera.org/share/13508a393bcd88dc5a1f07281b6309fc).
 
 **2023-09-21 to present**
-System Developer at [Svenska Handelsbanken]. Working with mainframe system z/OS and do Cobol programming.
+System Developer at [Svenska Handelsbanken]. Working with mainframe system z/OS, handle large dataset on DB2 and do Cobol programming.
 
 **2020-08 to 2023-06-04**
 Batchelor of Science in Information- and Communication Technology at

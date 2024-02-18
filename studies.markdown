@@ -6,8 +6,15 @@ permalink: /studies/
 
 I have a Batchelor of Science Degree at Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
 
+### 
+
+
 ### Completed Massive Open Online Courses (MOOCs)
-- Discrete Optimization, [Coursera](https://www.coursera.org/learn/discrete-optimization/home/info), Intermediate level with 8 weeks of study, 10-15 hours per week. Covered concepts include: Branch and Bound, Constraint Programming, (linear) Relaxation, Local Search, Meta-heuristics such as Tabu Search and Simulated Annealing, Linear Programming - including the simplex algorithm, simplex tableau, and duality, Mixed Integer Programming. Also included introduction to advanced topics (such as large neighbourhood search) as well as presenting a lot of different types of NP-hard optimization problems. Completed in January 2024. [Certificate](https://coursera.org/share/f36579c48f9a3deea9fa1d738a6b4b2f)
+- Machine Learning Specialization at [Coursera](https://www.coursera.org/specializations/machine-learning-introduction). The specialization certificat consists of three courses: 'Supervised Machine Learning: Regression and Classification', 'Advanced Learning Algorithms' and
+'Unsupervised Learning, Recommenders, Reinforcement Learning'. The courses teaches modern machine learning concepts, including supervised learning (linear regression, logistic regression, neural networks, decision trees), unsupervised learning (clustering, anomaly detection), recommender systems, and reinforcement learning. Some of the best practices for building machine learning models. Practical skills to apply machine learning techniques to challenging real-world problems. [Certificate](https://coursera.org/share/ce82274ff3b824a9d9f15bdbe9384806), 2024-02-14
+
+- Discrete Optimization at [Coursera](https://www.coursera.org/learn/discrete-optimization/home/info), Intermediate level with 8 weeks of study, 10-15 hours per week. Covered concepts include: Branch and Bound, Constraint Programming, (linear) Relaxation, Local Search, Meta-heuristics such as Tabu Search and Simulated Annealing, Linear Programming - including the simplex algorithm, simplex tableau, and duality, Mixed Integer Programming. Also included introduction to advanced topics (such as large neighbourhood search) as well as presenting a lot of different types of NP-hard optimization problems. Completed in January 2024. [Certificate](https://coursera.org/share/f36579c48f9a3deea9fa1d738a6b4b2f)
+
 
 ### Completed courses (in order of completion) of Batchelor Degree 2020-2023
 - Bachelor Degree Project - IA150X, 15 hp

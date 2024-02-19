@@ -4,7 +4,7 @@ title: My Machine Learning Notes
 permalink: /my_ml/
 ---
 
-Nice to know (remember) python libraries and their functions, used to build & train succesfull machine learning models.
+Nice to know (remember) python libraries and their functions, used to build & train succesfull machine learning models. Some of the code examples are taken from [Kaggle](https://www.kaggle.com).
 
 Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.  
 {% highlight python %}
@@ -13,19 +13,34 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
 {% endhighlight %}
 
 # Read data
-
 {% highlight python %}
     # Read the data
     X_full = pd.read_csv('../input/train.csv', index_col='Id')
     X_test_full = pd.read_csv('../input/test.csv', index_col='Id')
+{% endhighlight %}
 
+# Load data (into subsets)
+{% highlight python %}
     # Remove rows with missing target, separate target from predictors
     X_full.dropna(axis=0, subset=['SalePrice'], inplace=True)
     y = X_full.SalePrice
     X_full.drop(['SalePrice'], axis=1, inplace=True)
 {% endhighlight %}
 
-### Write data
+{% highlight python %}
+    # Select categorical columns with relatively low cardinality (convenient but arbitrary)
+    categorical_cols = [cname for cname in X_train_full.columns if X_train_full[cname].nunique() < 10 and X_train_full[cname].dtype == "object"]
+
+    # Select numerical columns
+    numerical_cols = [cname for cname in X_train_full.columns if X_train_full[cname].dtype in ['int64', 'float64']]
+
+    # Keep selected columns only
+    my_cols = categorical_cols + numerical_cols
+    X_train = X_train_full[my_cols].copy()
+    X_valid = X_valid_full[my_cols].copy()
+{% endhighlight %}
+
+# Write data
 {% highlight python %}
     # Save test predictions to file
     output = pd.DataFrame({'Id': X_test.index,
@@ -33,7 +48,7 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
     output.to_csv('submission.csv', index=False)
 {% endhighlight %}
 
-### Pandas DataFrame operations
+# Pandas DataFrame operations
 {% highlight python %}
     # Use only numerical predictors
     X = X_full.select_dtypes(exclude=['object'])
@@ -55,8 +70,7 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
 
 {% endhighlight %}
 
-- Evaluate data
-### Manipulate data
+## Manipulate data
 {% highlight python %}
     from sklearn.impute import SimpleImputer
 
@@ -68,6 +82,64 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
     # imputation removed column names; put them back
     imputed_X_train.columns = X_train.columns
     imputed_X_valid.columns = X_valid.columns
+{% endhighlight %}
+
+### Pipelines
+{% highlight python %}
+    from sklearn.compose import ColumnTransformer
+    from sklearn.pipeline import Pipeline
+    from sklearn.impute import SimpleImputer
+    from sklearn.preprocessing import OneHotEncoder
+
+    # Preprocessing for numerical data
+    numerical_transformer = SimpleImputer(strategy='constant')
+
+    # Preprocessing for categorical data
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+
+    # Bundle preprocessing for numerical and categorical data
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ('num', numerical_transformer, numerical_cols),
+            ('cat', categorical_transformer, categorical_cols)
+        ])
+{% highlight python %}
+
+{% endhighlight %}
+    from sklearn.metrics import mean_absolute_error
+
+    # Bundle preprocessing and modeling code in a pipeline
+    my_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                ('model', model)
+                                ])
+
+    # Preprocessing of training data, fit model 
+    my_pipeline.fit(X_train, y_train)
+
+    # Preprocessing of validation data, get predictions
+    preds = my_pipeline.predict(X_valid)
+
+    # Evaluate the model
+    score = mean_absolute_error(y_valid, preds)
+    print('MAE:', score)
+{% endhighlight %}
+
+## Evaluate data
+### Cross-validation
+{% highlight python %}
+    from sklearn.model_selection import cross_val_score
+
+    # Multiply by -1 since sklearn calculates *negative* MAE
+    scores = -1 * cross_val_score(my_pipeline, X, y,
+                                cv=5,
+                                scoring='neg_mean_absolute_error')
+
+    print("MAE scores:\n", scores)
+    print("Average MAE score (across experiments):")
+    print(scores.mean())
 {% endhighlight %}
 
 - Numpby operations

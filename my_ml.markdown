@@ -148,10 +148,11 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
 {% highlight python %}
     from sklearn.model_selection import train_test_split
     # Break off validation set from training data
-    X_train, X_valid, y_train, y_valid = train_test_split(X, y, train_size=0.8, test_size=0.2,
+    X_train, X_valid, y_train, y_valid = train_test_split(X, y, train_size=0.8, test_size=0.2)
 {% endhighlight %}
 
 ### Train models
+Random Forest Regression
 {% highlight python %}
     # Define and fit model
     model = RandomForestRegressor(n_estimators=100, random_state=0)
@@ -161,6 +162,27 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
     preds_valid = model.predict(final_X_valid)
     print("MAE (Your approach):")
     print(mean_absolute_error(y_valid, preds_valid))
+{% endhighlight %}
+
+Gradiant Boosting Regression
+{% highlight python %}
+    from xgboost import XGBRegressor
+    from sklearn.metrics import mean_absolute_error
+
+    # Define the model
+    my_model_2 = XGBRegressor(random_state=0,n_estimators=500,learning_rate=0.05,early_stopping_rounds=5) # Your code here
+
+    # Fit the model
+    my_model_2.fit(X_train,y_train,eval_set=[(X_train,y_train),(X_valid,y_valid)]) # Your code here
+
+    # Get predictions
+    predictions_2 = my_model_2.predict(X_valid) # Your code here
+
+    # Calculate MAE
+    mae_2 = mean_absolute_error(predictions_2,y_valid) # Your code here
+
+    # Uncomment to print MAE
+    print("Mean Absolute Error:" , mae_2)
 {% endhighlight %}
 
 ### Evaluate models

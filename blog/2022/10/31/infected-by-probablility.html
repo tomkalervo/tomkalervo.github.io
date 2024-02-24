@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Infected by probability | Tom Karlsson</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Infected by probability" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Programmer and Data Scientist with BSc in Information Technology." />
+<meta property="og:description" content="Programmer and Data Scientist with BSc in Information Technology." />
+<link rel="canonical" href="/blog/2022/10/31/infected-by-probablility.html" />
+<meta property="og:url" content="/blog/2022/10/31/infected-by-probablility.html" />
+<meta property="og:site_name" content="Tom Karlsson" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-31T06:31:26+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Infected by probability" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-10-31T06:31:26+00:00","datePublished":"2022-10-31T06:31:26+00:00","description":"Programmer and Data Scientist with BSc in Information Technology.","headline":"Infected by probability","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/10/31/infected-by-probablility.html"},"url":"/blog/2022/10/31/infected-by-probablility.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tom Karlsson" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tom Karlsson</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/cv/">CV</a><a class="page-link" href="/my_ml/">My Machine Learning Notes</a><a class="page-link" href="/my_unix/">My Unix Commands</a><a class="page-link" href="/studies/">Studies</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Infected by probability</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-31T06:31:26+00:00" itemprop="datePublished">Oct 31, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>This last week I was downed by illness. During the day when I had the highest fever I took a rapid SARS-COV-2 self-test. It came out positive. Even though I got covid over two years ago and have taken three vaccines over the past year and a half it seemed it was time again. Since I recently had a course in statistics and probability I found it fun to try my new skills with the information provided by the self-test. The documentation compared the results from the test with PT-PCR Results.
+<img src="/assets/img/221031-covid.jpg" alt="Covid self-test" /></p>
+
+<p>I want to know an approximate probability that I actually had a covid infection. Lets say that A is the is the stochastic variable that tells if the self-test is positive. B is the stochastic variable that tells if the PT-PCR is positive. Since my test said that A is positive, then what is the probability that I have an infection - that the PT-PCR also is positive?</p>
+
+<p>With help from <a href="https://www.investopedia.com/terms/b/bayes-theorem.asp">Bayes Theorem</a> we get the following equation:</p>
+<div>
+$$ P(B|A) = {P(A|B)P(B) \over P(A|B)P(B) + P(A|B^*)P(B^*)} $$
+</div>
+<p>And we set up the following models:</p>
+<div>
+$$ P(A|B) = p \textrm{ and } P(A|B^*) = q $$
+</div>
+<p>To approximate <em>p</em> and <em>q</em> we simple use the lab results displayed on the documentation. We use a binominal distribution from the positive and negative results from the PT-PCR; Bin(435,<em>p</em>) and Bin(628,<em>q</em>).</p>
+<div>
+$$ p^{*}_{obs} = {425 \over 435} \approx 0.977
+\textrm{  and  } 
+q^{*}_{obs} = {1 \over 628} \approx 0.002 $$
+</div>
+<p>Lastly, I will make a guess that 1% of the population has the infection. I could not find any source for a recent approximation but it is not to much of a wild guess. We can now go back and utilize Bayes theorem:</p>
+
+<div>
+$$ P(B|A) = {0.977*0.01 \over 0.977*0.01  + 0.002*0.99 } \approx 0.83$$
+</div>
+
+<p>The conclusion is that there is a 83% risk that I actually got an infection. 
+Notes: If the amount of infection in the population is greater than 1% - the risk would be even higher. At 2% the risk will be about 90%. This makes sense, both by reasoning and by looking at the math.</p>
+
+
+  </div><a class="u-url" href="/blog/2022/10/31/infected-by-probablility.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tom Karlsson</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tom Karlsson</li><li><a class="u-email" href="mailto:tom.kg.karlsson@gmail.com">tom.kg.karlsson@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomkalervo</span></a></li><li><a href="https://www.twitter.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">tomkalervo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Programmer and Data Scientist with BSc in Information Technology.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -61,7 +61,7 @@ At company [Fryda]
 Running my own business in media production. I produced films and media to fit customers needs.
 
 **2006-2009**
-Bachelors degree in journalism & media production at
+Studies in journalism & media production at
 Linneus University, Kalmar.
 
 #### Certificates

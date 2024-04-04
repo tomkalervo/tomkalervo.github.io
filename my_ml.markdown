@@ -142,8 +142,6 @@ Covered libraries are: Numpy, Pandas, Scikit learn, Tensorflow.
     print(scores.mean())
 {% endhighlight %}
 
-- Numpby operations
-
 ### Build models
 {% highlight python %}
     from sklearn.model_selection import train_test_split
@@ -197,4 +195,24 @@ Gradiant Boosting Regression
         preds = model.predict(X_valid)
         return mean_absolute_error(y_valid, preds)
 {% endhighlight %}
-- Validate
+
+### Visualization
+Two subplots in one figure:
+{% highlight python %}
+    for c in cols[:2]:
+        import warnings
+        warnings.filterwarnings("ignore")
+        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 5))
+        
+        sns.kdeplot(x=X_train[c], ax=axes[0], label='Original')
+        axes[0].set_title(c + ' - Original')
+        axes[0].legend()
+        
+        sns.kdeplot(x=X_transformed[c], ax=axes[1], label='Transformed')
+        axes[1].set_title(c + ' - Transformed')
+        axes[1].legend()
+
+        plt.tight_layout()
+        plt.show()
+{% endhighlight %}
+

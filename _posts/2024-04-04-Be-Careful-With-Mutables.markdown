@@ -6,7 +6,9 @@ categories: blog
 ---
 
 # Python: Be careful using mutables in python classes
-Object oriented programing is a very effecient and intuitive way of operating on data structures. The basic idea is to create objects that have their own data structures, functions and logic. I am currently developing my own parser in Python and started to design classes that would be instansiated as objects. What I discovered was that, when working with mutable data types such as lists, you might not get the result you expected.
+Object-oriented programming (OOP) is renowned for its efficiency and intuitive approach to managing data structures. By creating objects with their own encapsulated data, functions, and logic, developers can build robust and modular systems. Recently, while developing my own parser in Python, I encountered a fascinating quirk when working with mutable data types like lists.
+
+I discovered that the mutability of certain data types could lead to unexpected results. In this post I will cover an example of a class that keeps a list of items. 
 
 ## The first Example
 {% highlight python %}
@@ -18,7 +20,7 @@ class Example:
         self.items.append(item)
 {% endhighlight %}
 
-I set the default value of items to be an empty list. Now, let's create two instances of Example and add items to each instance:
+To account for the possibility that the class is instantiated before the list of items is known, I want to set a default value of items to be an empty list. This is good practice as it provides some documentation on what the class expects as parameters. Now, let's create two instances of Example and add items to each instance:
 
 {% highlight python %}
 # Create instance 1

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Proving correctnes of binary search | Tom Karlsson</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Proving correctnes of binary search" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Validation and verification One important aspect of algorithm design is the abillity to prove that your algorithm behaves as intended. Usually we run a variety of tests to verify this. This is almost, always needed for any larger or more complex systems. But if we want to validate the program, we have to prove its correctness. This is based on math and logical reasoning. This can be a bit tricky so you need to start att the lower levels. Validating the different parts a larger program is a good approach. It helps to make sure each part works as intended." />
+<meta property="og:description" content="Validation and verification One important aspect of algorithm design is the abillity to prove that your algorithm behaves as intended. Usually we run a variety of tests to verify this. This is almost, always needed for any larger or more complex systems. But if we want to validate the program, we have to prove its correctness. This is based on math and logical reasoning. This can be a bit tricky so you need to start att the lower levels. Validating the different parts a larger program is a good approach. It helps to make sure each part works as intended." />
+<link rel="canonical" href="/blog/2022/10/21/correctens-bst.html" />
+<meta property="og:url" content="/blog/2022/10/21/correctens-bst.html" />
+<meta property="og:site_name" content="Tom Karlsson" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-21T13:55:46+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Proving correctnes of binary search" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-10-21T13:55:46+00:00","datePublished":"2022-10-21T13:55:46+00:00","description":"Validation and verification One important aspect of algorithm design is the abillity to prove that your algorithm behaves as intended. Usually we run a variety of tests to verify this. This is almost, always needed for any larger or more complex systems. But if we want to validate the program, we have to prove its correctness. This is based on math and logical reasoning. This can be a bit tricky so you need to start att the lower levels. Validating the different parts a larger program is a good approach. It helps to make sure each part works as intended.","headline":"Proving correctnes of binary search","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2022/10/21/correctens-bst.html"},"url":"/blog/2022/10/21/correctens-bst.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tom Karlsson" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tom Karlsson</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/cv/">CV</a><a class="page-link" href="/my_ml/">My Machine Learning Notes</a><a class="page-link" href="/my_unix/">My Unix Commands</a><a class="page-link" href="/studies/">Studies</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Proving correctnes of binary search</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-21T13:55:46+00:00" itemprop="datePublished">Oct 21, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="validation-and-verification">Validation and verification</h3>
+<p>One important aspect of algorithm design is the abillity to prove that your algorithm behaves as intended. Usually we run a variety of tests to verify this. This is almost, always needed for any larger or more complex systems. But if we want to validate the program, we have to prove its correctness. This is based on math and logical reasoning. This can be a bit tricky so you need to start att the lower levels. Validating the different parts a larger program is a good approach. It helps to make sure each part works as intended.</p>
+
+<h3 id="an-algoritm">An algoritm</h3>
+<p>I recently had to implement a variant of a binary search when designing an algoritm by reduction. Simply put, the problem could be solved by binary search if I preprocessed the data. I had a value, <em>x</em>, and needed to know the index of the value, <em>y</em>, from a sorted array of numbers. The condition was that <em>y</em> needed to be the largest number in the array that was less than <em>x</em>. If <em>y</em> was found at Array[i], then <em>i</em> is the return-value. I had three conditions on the input: The first is that Array[0] = 0, the 0th index in the array has the value 0. The second is that all values in Array[0..n] are distinct (no two are the same). The third is that <em>x</em> &gt; 0.</p>
+
+<figure class="highlight"><pre><code class="language-pseudo" data-lang="pseudo">function find_y(Array[0..n], x)
+    left &lt;- 1
+    right &lt;- n
+    // Invariant: Array[left - 1] &lt; x AND Array[right + 1] &gt; x
+    while left &lt;= right do
+        mid &lt;- floor( (left+right) / 2 )
+        if Array[mid] &gt; x then
+            right &lt;- mid - 1
+        else if Array[mid] &lt; x then
+            left &lt;- mid + 1
+        else
+            return mid - 1
+    return left - 1</code></pre></figure>
+
+<p>Quite simple right? We have an array, start at the middle and compare our <em>x</em> value. If <em>x</em> is found, we can return the index below <em>mid</em>. If <em>x</em> is not found we either continue our search in the left half or the right half (thus decreasing our search area by one half). If <em>x</em> is not found in Array[1..n] we still want to get the index of a value <em>y</em> as described above. The code says that this value, after the loop is complete, is to be found at the index of <em>left</em> - 1. How can we know that?</p>
+
+<h3 id="an-invariant-based-proof">An invariant-based proof</h3>
+<p>If you can prove that the invariant is true throughout the loop and that the invariant leads to the intended output - then you are set. An invariant is really helpful when designing loops. <a href="https://yourbasic.org/algorithms/loop-invariants-explained/">yourbasic.org</a> even claim that it gives you superpowers! It really helps you keep you head straight when doing the design for a loop. 
+The invariant is a condition that is true when entering the loop. It is also true after every iteration of the loop. Lastly, but not least, it is true after the loop.</p>
+
+<figure class="highlight"><pre><code class="language-pseudo" data-lang="pseudo">Invariant: Array[left - 1] &lt; x AND Array[right + 1] &gt; x</code></pre></figure>
+
+<ul>
+  <li>Before entering the loop we see <em>left</em> is set to 1, thus <em>left</em> - 1 = 0. From the pre-conditions we have Array[0] = 0 and <em>x</em> &gt; 0. Since <em>right</em> is set to <em>n</em>, <em>right</em> + 1 is outside the range and can be viewed as infinite. So the invariant is true before the loop.</li>
+  <li>Inside the loop we have three cases.
+    <ol>
+      <li>If <em>x</em> happens to be found, it is trivial to se that the index <em>mid</em> - 1 holds the value <em>y</em> we are searching for. This is returned which terminates the function. This is the same as changing the value of <em>left</em> &lt;- <em>mid</em> (and break the loop - but not needed for the correctness).</li>
+      <li>If <em>x</em> is less than Array[mid] we continue our search among the half that contains the lesser values. We set <em>right</em> &lt;- <em>mid</em> - 1, this means that the value at Array[right+1] is the value we compared with <em>x</em>. The invariant is still true.</li>
+      <li>If <em>x</em> is greater than Array[mid] we continue our search among the half that contains the greater values. We do update <em>left</em>. We set <em>left</em> &lt;- <em>mid</em> + 1, this means that the value at Array[left-1] is the value we compared with <em>x</em>. The invariant is still true.</li>
+    </ol>
+  </li>
+  <li>
+    <p>Termination: If the value <em>x</em> is not found we will have a combination of alternative 1 and 2. The area to search is at least decreased by 1 in every iteration. This means that eventually <em>left</em> will become greater than <em>right</em>. Thus the loop will terminate.</p>
+  </li>
+  <li>Invariant: We have the same reasoning as inside the loop. Since the invariant was true in all iterations inside the loop it is still true after.</li>
+</ul>
+
+<h4 id="conclusion">Conclusion</h4>
+<p>After the loop is terminated we have the following facts:</p>
+<ul>
+  <li>The invariant is true</li>
+  <li><em>left</em> &gt; <em>right</em></li>
+  <li><em>x</em> did not exists in the array</li>
+</ul>
+
+<p>Actuallay, <em>left</em> &gt; <em>right</em> means that <em>left</em> is equal to <em>right</em> + 1. From Array[right+1] &gt; <em>x</em> we get Array[left] &gt; <em>x</em>. Together with Array[left-1] &lt; <em>x</em> we see that <em>x</em> is enclosed by <em>left</em> and <em>left</em>-1. We can say for certain that the value we sought is found at index <em>left</em>-1.</p>
+
+
+  </div><a class="u-url" href="/blog/2022/10/21/correctens-bst.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tom Karlsson</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tom Karlsson</li><li><a class="u-email" href="mailto:tom.kg.karlsson@gmail.com">tom.kg.karlsson@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomkalervo</span></a></li><li><a href="https://www.twitter.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">tomkalervo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Programmer and Data Scientist with BSc in Information Technology.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

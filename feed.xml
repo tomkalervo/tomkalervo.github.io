@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2024-04-04T15:47:13+00:00</updated><id>/feed.xml</id><title type="html">Tom Karlsson</title><subtitle>Programmer and Data Scientist with BSc in Information Technology.</subtitle><entry><title type="html">Python: Be careful using mutables in python classes</title><link href="/blog/2024/04/04/Be-Careful-With-Mutables.html" rel="alternate" type="text/html" title="Python: Be careful using mutables in python classes" /><published>2024-04-04T15:18:00+00:00</published><updated>2024-04-04T15:18:00+00:00</updated><id>/blog/2024/04/04/Be-Careful-With-Mutables</id><content type="html" xml:base="/blog/2024/04/04/Be-Careful-With-Mutables.html"><![CDATA[<h1 id="python-be-careful-using-mutables-in-python-classes">Python: Be careful using mutables in python classes</h1>
+<p>Object-oriented programming (OOP) is renowned for its efficiency and intuitive approach to managing data structures. By creating objects with their own encapsulated data, functions, and logic, developers can build robust and modular systems. Recently, while developing my own parser in Python, I encountered a fascinating quirk when working with mutable data types like lists.</p>
+
+<p>I discovered that the mutability of certain data types could lead to unexpected results. In this post I will cover an example of a class that keeps a list of items.</p>
+
+<h2 id="the-first-example">The first Example</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+
+    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code></pre></figure>
+
+<p>To account for the possibility that the class is instantiated before the list of items is known, I want to set a default value of items to be an empty list. This is good practice as it provides some documentation on what the class expects as parameters. Now, let’s create two instances of Example and add items to each instance:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Create instance 1
+</span><span class="n">obj1</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+<span class="n">obj1</span><span class="p">.</span><span class="n">add_item</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Create instance 2
+</span><span class="n">obj2</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
+<span class="n">obj2</span><span class="p">.</span><span class="n">add_item</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Instance 1 items:"</span><span class="p">,</span> <span class="n">obj1</span><span class="p">.</span><span class="n">items</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Instance 2 items:"</span><span class="p">,</span> <span class="n">obj2</span><span class="p">.</span><span class="n">items</span><span class="p">)</span></code></pre></figure>
+
+<p>You might expect the output to be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Instance 1 items: [1]
+Instance 2 items: [2]
+</code></pre></div></div>
+<p>However, the actual output will be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Instance 1 items: [1, 2]
+Instance 2 items: [1, 2]
+</code></pre></div></div>
+
+<p>This happens because both obj1 and obj2 share the same default list object. When you modify obj1.items by calling add_item(1), you’re actually modifying the default list object, which is also referenced by obj2.items.
+To avoid this behavior and ensure each instance has its own independent list, you should initialize the mutable attribute inside the <strong>init</strong> method like so:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span> <span class="ow">or</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></code></pre></figure>
+
+<p>With this modification, each instance will have its own empty list if no list is provided during initialization, preventing the sharing of mutable objects between instances.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[Python: Be careful using mutables in python classes Object-oriented programming (OOP) is renowned for its efficiency and intuitive approach to managing data structures. By creating objects with their own encapsulated data, functions, and logic, developers can build robust and modular systems. Recently, while developing my own parser in Python, I encountered a fascinating quirk when working with mutable data types like lists.]]></summary></entry><entry><title type="html">Linear Relaxation for Traveling Salesman Problem (TSP)</title><link href="/blog/2024/02/03/LP-for-TSP.html" rel="alternate" type="text/html" title="Linear Relaxation for Traveling Salesman Problem (TSP)" /><published>2024-02-03T20:37:00+00:00</published><updated>2024-02-03T20:37:00+00:00</updated><id>/blog/2024/02/03/LP-for-TSP</id><content type="html" xml:base="/blog/2024/02/03/LP-for-TSP.html"><![CDATA[<h1 id="navigating-the-world-of-optimization-a-dive-into-linear-relaxation">Navigating the World of Optimization: A Dive into Linear Relaxation</h1>
+
+<p>Fresh from completing a MOOC on <a href="https://www.coursera.org/learn/discrete-optimization">Discrete Optimization</a> offered by Coursera, I find myself equipped with a solid foundation in understanding concepts and techniques for solving optimization problems.</p>
+
+<p>One intriguing technique is Linear Programming (LP). So, in the following blog post, I’ll discuss my insights into leveraging LP for achieving linear relaxation in the context of TSP.</p>
+
+<h2 id="the-tsp-conundrum">The TSP Conundrum</h2>
+
+<p>The Traveling Salesman Problem (TSP), a classic optimization challenge, tasks us with finding the shortest path that visits each node exactly once. This problem is no walk in the park… :D …it’s NP-complete, meaning there’s no guaranteed speedy algorithm to find an optimal solution as the problem size grows.</p>
+
+<h2 id="linear-relaxation-to-the-rescue">Linear Relaxation to the Rescue</h2>
+
+<p>To tackle the complexity of TSP, one approach is to leverage Linear Programming. LP allows us to relax binary constraints on decision variables, allowing real-valued solutions. Though these solutions might not be integers, they serve as an efficient upper bound for the optimization problem.</p>
+
+<h2 id="insights-from-the-implementation">Insights from the Implementation</h2>
+
+<p>In a recent exploration, I delved into implementing an LP-based solution using Google OR-Tools. During the course at coursera I did implement my own LP using the simplex method. But it was more for learning purposes than for actuall usage. The notebook I created walks through the intricacies, from generating a graph to visualizing the obtained solutions. I found this approach not only insightful but also a stepping stone for further refinements.</p>
+
+<p>If you’re curious about the implementation details, branching strategies, and the visualization of the solutions, I invite you to check out the notebook. You can find it <a href="https://github.com/tomkalervo/demos/blob/main/TSP.ipynb">here</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Linear relaxation emerges as a powerful tool in the arsenal of solving combinatorial optimization problems. It not only provides a pragmatic upper bound but also lays the groundwork for iterative improvements. Tackling TSP with LP has been an enlightening journey, and I’m excited to see where this exploration leads next.</p>
+
+<p>Happy optimizing!</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[Navigating the World of Optimization: A Dive into Linear Relaxation]]></summary></entry><entry><title type="html">WebAssembly - Connecting Ends</title><link href="/blog/2024/01/11/WebAssembly-connect-ends.html" rel="alternate" type="text/html" title="WebAssembly - Connecting Ends" /><published>2024-01-11T18:39:00+00:00</published><updated>2024-01-11T18:39:00+00:00</updated><id>/blog/2024/01/11/WebAssembly-connect-ends</id><content type="html" xml:base="/blog/2024/01/11/WebAssembly-connect-ends.html"><![CDATA[<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>I made my first WebAssembly implementation, exploring two fibonacci-calculating-functions. It can be viewed at <a href="https://htmlpreview.github.io/?https://github.com/tomkalervo/my_wasm/blob/main/fib/fib.html">From C to Wasm, Fibonacci</a>.</p>
+
+<h1 id="why-i-wanted-to-learn-webassembly">Why I Wanted to Learn WebAssembly</h1>
+<p>For years I have been coding algorithms, solving small and not so small problems. Most often, these programs stay as local C, Java, or Elixir applications - Since there is no ambition to build a finished product around it. But some programs would be fun to make available, for other to test and tinker with.</p>
+
+<p>I recently finished a course on coursera regarding <a href="https://www.coursera.org/learn/discrete-optimization">Discret Optimization</a>. In this course I learned new concepts that I build prototypes on. They can be found in my github-repo for the course. Once again I felt the urge to be able to display/make the concepts interactable - So I started looking into WebAssembly:</p>
+
+<blockquote>
+  <p>WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications. <a href="https://webassembly.org">Source</a></p>
+</blockquote>
+
+<h1 id="fibonacci-in-c">Fibonacci in c</h1>
+<p>To start off I wrote two c-functions to calculate a fibonacci-value. Fibonacci is a squence of <em>n</em> integers. It may be defined by the following recursive relation:</p>
+
+<p>Basecase(s):</p>
+<div>
+$$ n_{0} = 0 $$
+$$ n_{1} = 1 $$
+</div>
+
+<p>Recursive case:</p>
+<div>
+$$ n_{i} = n_{i-1} + n_{i-2} $$
+</div>
+
+<p>So the first function implemented in C follows the recursive formula:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">long</span> <span class="nf">fib_recursive</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">fib_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>This implementation is sometimes called the “naive” implementation. The reason beeing that it will result in an unnecessary exponential time complexity (as well as memory complexity) - each call results in two new calls where same fibonacci values will be calculated multiple times.</p>
+
+<p>A more reasonable approach is to use dynamic progragramming - a technique that can be chosen for any recursive formula. It starts from bottom up, the basecases, and stores only the values needed to calculate the next value. This becomes clear in my second c-function for fibonacci-calculation:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">long</span> <span class="nf">fib_dynamic_programming</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">f0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">f1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">){</span>
+        <span class="kt">long</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">+</span> <span class="n">f0</span><span class="p">;</span>
+        <span class="n">f0</span> <span class="o">=</span> <span class="n">f1</span><span class="p">;</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">f1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h1 id="c-in-wasm">C in Wasm</h1>
+<p>To compile the c-code into wasm I conveniently used Brew on my mac. This installed <a href="https://emscripten.org/">Emscripten</a>, that can be run from the terminal command emcc.</p>
+
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tomkarlsson@Toms-MBP ~ %  emcc fib.c <span class="nt">-o</span> fib.js   
+</code></pre></div></div>
+
+<p>It will produce a <code class="language-plaintext highlighter-rouge">fib.wasm</code> file and a <code class="language-plaintext highlighter-rouge">fib.js</code> file. The <code class="language-plaintext highlighter-rouge">.js</code> contains javascript that loads the <code class="language-plaintext highlighter-rouge">.wasm</code> file. To fully understand how to link the .wasm with javascript I decided to write my own HTML with inline javascript. Due to the nature of the two C functions having different timecomplexity (linear vs exponential) I also added a javascript timing-snippet to display the time it took to execute each function.</p>
+
+<p>The HTML code, as well as the C code, can be found in my github-repo <a href="https://github.com/tomkalervo/my_wasm/tree/main/fib">my_wasm/fib/</a> - But! The awesomeness of Wasm now also make this little project interactable; <a href="https://htmlpreview.github.io/?https://github.com/tomkalervo/my_wasm/blob/main/fib/fib.html">From C to Wasm, Fibonacci</a></p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">AOC - Preparing Python</title><link href="/blog/2023/11/29/AOC-preparing-python.html" rel="alternate" type="text/html" title="AOC - Preparing Python" /><published>2023-11-29T20:15:46+00:00</published><updated>2023-11-29T20:15:46+00:00</updated><id>/blog/2023/11/29/AOC-preparing-python</id><content type="html" xml:base="/blog/2023/11/29/AOC-preparing-python.html"><![CDATA[<p>The temperature has dropped below zero, white gleaming snow lights up the winter darkness and Kris Kringle is working hard at his workshop. This weekend the yearly <a href="https://adventofcode.com">Advent of Code</a> launches - providing a new code challange each day of Christmans. This year I am to give Python a shot. Being a somewhat beginner at Python I hope that learning and using python might speed up the coding process - at least that is my current view of python; a quick way to prototype code ideas.</p>
+
+<p>To prepare I created a code snippet for reading files as input. Since all challanges involve input that can be quite large, it is almost always easiest to put it into a textfile and input that to the program solver. Here is what I came up with:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">printit</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"input: "</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">x</span><span class="p">:</span>
+  <span class="n">printit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">try</span> <span class="p">:</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+  <span class="k">except</span> <span class="nb">EOFError</span><span class="p">:</span> <span class="k">break</span></code></pre></figure>
+
+<p>The purpose is to read line by line and do necessary string parsing. As of now I only print out each line. There are of course other options to chose from, such as picking up the filepath from command line arguments and then open a file stream. I have not yet decided the best (most time effecient) approach.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[The temperature has dropped below zero, white gleaming snow lights up the winter darkness and Kris Kringle is working hard at his workshop. This weekend the yearly Advent of Code launches - providing a new code challange each day of Christmans. This year I am to give Python a shot. Being a somewhat beginner at Python I hope that learning and using python might speed up the coding process - at least that is my current view of python; a quick way to prototype code ideas.]]></summary></entry><entry><title type="html">Bachelor is completed</title><link href="/blog/2023/08/29/Bachelor-is-completed.html" rel="alternate" type="text/html" title="Bachelor is completed" /><published>2023-08-29T19:13:46+00:00</published><updated>2023-08-29T19:13:46+00:00</updated><id>/blog/2023/08/29/Bachelor-is-completed</id><content type="html" xml:base="/blog/2023/08/29/Bachelor-is-completed.html"><![CDATA[<p>Woop Woop! After three years of studies I have now gotten my degree certificate: Degree of Batchelor of Science in Information- and Communication Technology. The thesis, <a href="https://lnkd.in/d_HTXYNQ">Unlocking the Potential of Biodiversity Data: Managing and Sharing Data from Biodiversity Surveys</a>, is also published and publicly available.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[Woop Woop! After three years of studies I have now gotten my degree certificate: Degree of Batchelor of Science in Information- and Communication Technology. The thesis, Unlocking the Potential of Biodiversity Data: Managing and Sharing Data from Biodiversity Surveys, is also published and publicly available.]]></summary></entry><entry><title type="html">Software is not sustainable</title><link href="/blog/2023/03/26/sustainable-software.html" rel="alternate" type="text/html" title="Software is not sustainable" /><published>2023-03-26T14:30:46+00:00</published><updated>2023-03-26T14:30:46+00:00</updated><id>/blog/2023/03/26/sustainable-software</id><content type="html" xml:base="/blog/2023/03/26/sustainable-software.html"><![CDATA[<p>I own a three year old ‘smart’-tv. When watching streaming-services we usually go through an app from the ‘smart’-system built into the tv. A few months ago, some apps needed updates and one of them said it would no longer support my tv model. Some light rage came and passed. Thankfully it is just as easy to stream through our smart devices directly to the tv. But it got me thinking, what is the reason that software developers stop supporting three year old devices? I have the same experience regarding my ipad, it is however much older. But still very functional.</p>
+
+<p>I recently studied a course in sustainable development and innovation. It was on some levels an eye-opener. I will try and summarize important aspects regarding sustainability in software development.</p>
+
+<h1 id="sustainability-as-such">Sustainability as such</h1>
+<p>The aspects of sustainability should always be present during development, even software. Defining sustainability is a chapter on its own, the <a href="https://en.wikipedia.org/wiki/Brundtland_Commission">Brundtland</a> report from 1987 states that:</p>
+<blockquote>
+  <p>Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs. 
+It is quite obvious that we today, and for quite a while, have been exploiting our planet more than it can handle.</p>
+</blockquote>
+
+<h1 id="hardware-in-general">Hardware in general</h1>
+<p>Lice-Cycle Assessment, (LCA),  is a common framework, standardized by ISO, to measure and define the sustainability of products and services. Hardware has most of its environmental impact during production and disposal. For example harvesting of rare minerals, factory-related emissions and handling of electronic waste have great impact on sustainability. It is almost always the case that the hardware-products do not live long enough to be considered sustainable.</p>
+
+<h1 id="software-in-specific">Software in specific</h1>
+<p>It is not as easy to picture the impact on sustainability from software. What first comes to mind is energy-efficient code (or algorithm-design). This is true, the more frequent a software is used, the more energy there is to save with clever algorithms and design. If heavy on network-traffic, a cache might decrease network traffic, and thus also energy consumption.</p>
+
+<p>But the aspects I find most interesting is to develop code that prolongs the life of hardware. Let’s not forget that it is the development of new software that makes ‘old’ hardware obsolete. Far too often does new updates stop supporting older hardware. This creates an unnecessary consumption of hardware - directly shortens the lifespan of products. Here lies a major responsibility for software developers to continue to support older devices.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[I own a three year old ‘smart’-tv. When watching streaming-services we usually go through an app from the ‘smart’-system built into the tv. A few months ago, some apps needed updates and one of them said it would no longer support my tv model. Some light rage came and passed. Thankfully it is just as easy to stream through our smart devices directly to the tv. But it got me thinking, what is the reason that software developers stop supporting three year old devices? I have the same experience regarding my ipad, it is however much older. But still very functional.]]></summary></entry><entry><title type="html">Time for thesis: Investigating data models</title><link href="/blog/2023/02/08/time-for-thesis.html" rel="alternate" type="text/html" title="Time for thesis: Investigating data models" /><published>2023-02-08T19:46:46+00:00</published><updated>2023-02-08T19:46:46+00:00</updated><id>/blog/2023/02/08/time-for-thesis</id><content type="html" xml:base="/blog/2023/02/08/time-for-thesis.html"><![CDATA[<p>There is a great need today for organizations to transition towards data-driven development. Utilizing data can greatly enhance the workflow and give insights that enable the organization to grow within its field. But the sheer amount of data and the broad variety of data sources makes it quite complex to choose a data model. And the data model is the foundation for implementing a data management system.</p>
+
+<p>One data model is the <a href="https://en.wikipedia.org/wiki/Entity?relationship_model">ER-model</a>, this model is traditionally used when data can be represented in tables. It is used in a relational database which enables the use of SQL-queries.</p>
+
+<p>This term I will look into a user case, a company named <a href="https://www.ecogain.se">Ecogain</a>, and evaluate different data models in relation to their data and their workflow. The purpose is to give some guidance for other organizations in the same situation, to better understand the pros and cons of different data models.</p>
+
+<p>Sidenote: <a href="https://www.ecogain.se">Ecogain</a> has a most interesting and highly relevant business model. They are experts on ecology and biodiversity - and they use their knowledge to assist other organizations to implement environmental sustainability in their projects. It is inspiring to see more and more organizations incorporating sustainability into their business.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[There is a great need today for organizations to transition towards data-driven development. Utilizing data can greatly enhance the workflow and give insights that enable the organization to grow within its field. But the sheer amount of data and the broad variety of data sources makes it quite complex to choose a data model. And the data model is the foundation for implementing a data management system.]]></summary></entry><entry><title type="html">Winter challenges are coming</title><link href="/blog/2022/12/01/Winter-challenges-are-coming.html" rel="alternate" type="text/html" title="Winter challenges are coming" /><published>2022-12-01T18:38:46+00:00</published><updated>2022-12-01T18:38:46+00:00</updated><id>/blog/2022/12/01/Winter-challenges-are-coming</id><content type="html" xml:base="/blog/2022/12/01/Winter-challenges-are-coming.html"><![CDATA[<p>Today is the first of December which means that today is the start of <a href="https://adventofcode.com">Advent of Code</a>. A yearly coding challenge that releases one new challenge each day during December until Christmas. This is a great opportunity to either learn a new programming language or refresh one you haven’t used in a while. I decided on the latter and refreshed my Elixir skills.</p>
+
+<p>Today’s challenge involved some string operations - which comes very natural in Elixir. There were some quirks however. The sample input was the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000
+</code></pre></div></div>
+<p>The goal was to summarize the contiguous values and find the largest sum (which is 24000). This was achieved with a couple of pipes:</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="no">String</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="no">In</span><span class="o">.</span><span class="n">put</span><span class="p">,</span> <span class="sr">~r/(\n)/</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="no">List</span><span class="o">.</span><span class="n">foldl</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="n">h</span><span class="o">|</span><span class="n">t</span><span class="p">])</span><span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">""</span> <span class="k">do</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">h</span><span class="o">|</span><span class="n">t</span><span class="p">]</span>
+      <span class="k">else</span>
+        <span class="p">[</span><span class="n">h</span><span class="o">+</span><span class="no">String</span><span class="o">.</span><span class="n">to_integer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">|</span><span class="n">t</span><span class="p">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span><span class="p">)</span>
+    <span class="o">|&gt;</span> <span class="no">List</span><span class="o">.</span><span class="n">foldl</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span><span class="o">-&gt;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">,</span> <span class="k">do</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="k">else</span><span class="p">:</span> <span class="n">max</span> <span class="k">end</span><span class="p">)</span></code></pre></figure>
+
+<p>In.put represents the input formatted as a string. The key to split the string was to use a <a href="https://hexdocs.pm/elixir/1.13/Regex.html">regex</a>. Without it we would lose the blank lines. Now we get a list where each line is an element. Here on we can pipe the list through to List.foldl/3 and calculate the sum of contiguous values. From here on we have a new list where we need to find the highest value. It is done by piping it through another List.foldl/3 that accomplishes this.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[Today is the first of December which means that today is the start of Advent of Code. A yearly coding challenge that releases one new challenge each day during December until Christmas. This is a great opportunity to either learn a new programming language or refresh one you haven’t used in a while. I decided on the latter and refreshed my Elixir skills.]]></summary></entry><entry><title type="html">Getting the flow of c++</title><link href="/blog/2022/11/03/Flow-of-cpp.html" rel="alternate" type="text/html" title="Getting the flow of c++" /><published>2022-11-03T17:15:46+00:00</published><updated>2022-11-03T17:15:46+00:00</updated><id>/blog/2022/11/03/Flow-of-cpp</id><content type="html" xml:base="/blog/2022/11/03/Flow-of-cpp.html"><![CDATA[<p>If you have a bipartite graph and want to get a maximum matching - you can reduce the problem by building a flow graph and calculate its maximum flow.
+Ford and Fulkerson are the inventors behind the method <a href="https://en.wikipedia.org/wiki/Ford?Fulkerson_algorithm">Ford-Fulkerson</a> which calculates the maximal flow through a directed graph. When implemented using breadth-first search you get the <a href="https://en.wikipedia.org/wiki/Edmonds?Karp_algorithm">Edmonds-Karp</a> algorithm. You have to keep an adjacency list of vertices as well as edge-information for forward edges and backward edges. Using c++ I was able to effectively search, save paths and update the flow. First off we need a good way to store the data for each edge. This is done with a struct called <em>edgeflow</em> and a global vector <em>edge_list</em> that is an adjacency list (of edges).</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">struct</span> <span class="nc">edgeflow</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">flow</span><span class="p">,</span> <span class="n">capacity</span><span class="p">;</span>
+   <span class="k">struct</span> <span class="nc">edgeflow</span> <span class="o">*</span><span class="n">reverse</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">list</span><span class="o">&lt;</span><span class="n">edgeflow</span> <span class="o">*&gt;&gt;</span> <span class="n">edge_list</span><span class="p">;</span></code></pre></figure>
+
+<p>For each edge we create an edgeflow pointer, allocate memory, set all the variables and insert the pointer into <em>edge_list</em>. For each edge we also create a backwards-edge which is linked together with the forward-edge using the reverse pointer. This edge is also added to <em>edge_list</em>.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="c1">// for all edges (v,u), c is edge capacity of (v,u)</span>
+<span class="k">struct</span> <span class="nc">edgeflow</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">edgeflow</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="nc">edgeflow</span><span class="p">));</span>
+<span class="k">struct</span> <span class="nc">edgeflow</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">edgeflow</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="nc">edgeflow</span><span class="p">));</span>
+<span class="n">a</span><span class="o">-&gt;</span><span class="n">from</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+<span class="n">b</span><span class="o">-&gt;</span><span class="n">from</span> <span class="o">=</span> <span class="n">u</span><span class="p">;</span>
+<span class="n">a</span><span class="o">-&gt;</span><span class="n">to</span> <span class="o">=</span> <span class="n">u</span><span class="p">;</span>
+<span class="n">b</span><span class="o">-&gt;</span><span class="n">to</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+<span class="n">a</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">b</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">a</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+<span class="n">b</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">a</span><span class="o">-&gt;</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">b</span><span class="o">-&gt;</span><span class="n">reverse</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+<span class="n">edge_list</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">v</span><span class="p">).</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="n">edge_list</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">u</span><span class="p">).</span><span class="n">push_back</span><span class="p">(</span><span class="n">b</span><span class="p">);</span></code></pre></figure>
+
+<p>Now we can start calculating the max flow from the node <em>start</em> to the node <em>sink</em>. While a possible path is found from <em>start</em> to <em>sink</em> we continue to increase flow along this path:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">void</span> <span class="nf">calculateMaxFlow</span><span class="p">()</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">list</span><span class="o">&lt;</span><span class="n">edgeflow</span> <span class="o">*&gt;</span> <span class="n">path</span><span class="p">;</span>
+   <span class="n">flow</span> <span class="o">=</span> <span class="n">BFS</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">flow</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+   <span class="p">{</span>
+       <span class="k">for</span> <span class="p">(;</span> <span class="o">!</span><span class="n">path</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span> <span class="n">path</span><span class="p">.</span><span class="n">pop_front</span><span class="p">())</span>
+       <span class="p">{</span>
+           <span class="n">edgeflow</span> <span class="o">*</span><span class="n">e</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+           <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">+</span> <span class="n">flow</span><span class="p">;</span>
+           <span class="n">e</span><span class="o">-&gt;</span><span class="n">reverse</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="n">maxflow</span> <span class="o">+=</span> <span class="n">flow</span><span class="p">;</span>
+       <span class="n">flow</span> <span class="o">=</span> <span class="n">BFS</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Here we can really utilize the pointers. The path built by <em>BFS</em> is a list with pointers to each edge. We get instant access to these objects and can update their values. Let us see how the path is found using <em>BFS</em>:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="nf">BFS</span><span class="p">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">edgeflow</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">vector</span><span class="o">&lt;</span><span class="n">edgeflow</span> <span class="o">*&gt;</span> <span class="n">parent</span><span class="p">;</span>
+   <span class="n">parent</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">vertex_total</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+ 
+   <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+   <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+   <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">parent</span><span class="p">[</span><span class="n">sink</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+       <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+ 
+       <span class="k">for</span> <span class="p">(</span><span class="n">edgeflow</span> <span class="o">*</span><span class="n">e</span> <span class="o">:</span> <span class="n">edge_list</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+       <span class="p">{</span>
+ 
+           <span class="c1">// is there capacity left  in e? If so we can use it in our path</span>
+           <span class="kt">int</span> <span class="n">possible_flow</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">-</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span><span class="p">;</span>
+ 
+           <span class="c1">// if not visited and there exists a flow, we add edge e to the BFS-queue and mark it as visited</span>
+           <span class="k">if</span> <span class="p">((</span><span class="n">parent</span><span class="p">[</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">to</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">possible_flow</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+           <span class="p">{</span>
+               <span class="n">parent</span><span class="p">[</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+               <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">to</span><span class="p">);</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+   <span class="p">}</span>
+ 
+   <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">sink</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="k">else</span>
+   <span class="p">{</span>
+       <span class="n">edgeflow</span> <span class="o">*</span><span class="n">e</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">sink</span><span class="p">];</span>
+       <span class="kt">int</span> <span class="n">min_flow</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">-</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span><span class="p">;</span>
+       <span class="n">path</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+ 
+       <span class="k">while</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">from</span> <span class="o">!=</span> <span class="n">start</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="n">e</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">from</span><span class="p">];</span>
+           <span class="n">min_flow</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">-</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_flow</span> <span class="o">?</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">capacity</span> <span class="o">-</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">flow</span><span class="p">)</span> <span class="o">:</span> <span class="n">min_flow</span><span class="p">;</span>
+           <span class="n">path</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+       <span class="p">}</span>
+ 
+       <span class="k">return</span> <span class="n">min_flow</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Since path is a list type it is implicitly declared as a pointer. This means that we receive its address as the argument in <em>BFS</em>. All operations done to the path inside <em>BFS</em> can be accessed outside <em>BFS</em> aswell. Looking at time efficency we see that the method of finding the maximum flow is only bound by the speed of breadth first search times the number of possible paths in the graph.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[If you have a bipartite graph and want to get a maximum matching - you can reduce the problem by building a flow graph and calculate its maximum flow. Ford and Fulkerson are the inventors behind the method Ford-Fulkerson which calculates the maximal flow through a directed graph. When implemented using breadth-first search you get the Edmonds-Karp algorithm. You have to keep an adjacency list of vertices as well as edge-information for forward edges and backward edges. Using c++ I was able to effectively search, save paths and update the flow. First off we need a good way to store the data for each edge. This is done with a struct called edgeflow and a global vector edge_list that is an adjacency list (of edges). struct edgeflow { int from, to, flow, capacity; struct edgeflow *reverse; }; vector&lt;list&lt;edgeflow *&gt;&gt; edge_list; For each edge we create an edgeflow pointer, allocate memory, set all the variables and insert the pointer into edge_list. For each edge we also create a backwards-edge which is linked together with the forward-edge using the reverse pointer. This edge is also added to edge_list. // for all edges (v,u), c is edge capacity of (v,u) struct edgeflow *a = (struct edgeflow *)malloc(sizeof(struct edgeflow)); struct edgeflow *b = (struct edgeflow *)malloc(sizeof(struct edgeflow)); a-&gt;from = v; b-&gt;from = u; a-&gt;to = u; b-&gt;to = v; a-&gt;flow = 0; b-&gt;flow = 0; a-&gt;capacity = c; b-&gt;capacity = 0; a-&gt;reverse = b; b-&gt;reverse = a; edge_list.at(v).push_back(a); edge_list.at(u).push_back(b); Now we can start calculating the max flow from the node start to the node sink. While a possible path is found from start to sink we continue to increase flow along this path: void calculateMaxFlow() { int flow = 0; list&lt;edgeflow *&gt; path; flow = BFS(path); while (!(flow == 0)) { for (; !path.empty(); path.pop_front()) { edgeflow *e = path.front(); e-&gt;flow = e-&gt;flow + flow; e-&gt;reverse-&gt;flow = e-&gt;flow * -1; } maxflow += flow; flow = BFS(path); } } Here we can really utilize the pointers. The path built by BFS is a list with pointers to each edge. We get instant access to these objects and can update their values. Let us see how the path is found using BFS: int BFS(list&lt;edgeflow *&gt; &amp;path) { vector&lt;edgeflow *&gt; parent; parent.resize(vertex_total + 1, NULL); queue&lt;int&gt; q; q.push(start); while (!q.empty() &amp;&amp; parent[sink] == NULL) { int v = q.front(); q.pop(); for (edgeflow *e : edge_list[v]) { // is there capacity left in e? If so we can use it in our path int possible_flow = e-&gt;capacity - e-&gt;flow; // if not visited and there exists a flow, we add edge e to the BFS-queue and mark it as visited if ((parent[e-&gt;to] == NULL) &amp;&amp; (possible_flow &gt; 0)) { parent[e-&gt;to] = e; q.push(e-&gt;to); } } } if (parent[sink] == NULL) return 0; else { edgeflow *e = parent[sink]; int min_flow = e-&gt;capacity - e-&gt;flow; path.push_front(e); while (e-&gt;from != start) { e = parent[e-&gt;from]; min_flow = (e-&gt;capacity - e-&gt;flow) &lt; min_flow ? (e-&gt;capacity - e-&gt;flow) : min_flow; path.push_front(e); } return min_flow; } } Since path is a list type it is implicitly declared as a pointer. This means that we receive its address as the argument in BFS. All operations done to the path inside BFS can be accessed outside BFS aswell. Looking at time efficency we see that the method of finding the maximum flow is only bound by the speed of breadth first search times the number of possible paths in the graph.]]></summary></entry><entry><title type="html">Infected by probability</title><link href="/blog/2022/10/31/infected-by-probablility.html" rel="alternate" type="text/html" title="Infected by probability" /><published>2022-10-31T06:31:26+00:00</published><updated>2022-10-31T06:31:26+00:00</updated><id>/blog/2022/10/31/infected-by-probablility</id><content type="html" xml:base="/blog/2022/10/31/infected-by-probablility.html"><![CDATA[<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>This last week I was downed by illness. During the day when I had the highest fever I took a rapid SARS-COV-2 self-test. It came out positive. Even though I got covid over two years ago and have taken three vaccines over the past year and a half it seemed it was time again. Since I recently had a course in statistics and probability I found it fun to try my new skills with the information provided by the self-test. The documentation compared the results from the test with PT-PCR Results.
+<img src="/assets/img/221031-covid.jpg" alt="Covid self-test" /></p>
+
+<p>I want to know an approximate probability that I actually had a covid infection. Lets say that A is the is the stochastic variable that tells if the self-test is positive. B is the stochastic variable that tells if the PT-PCR is positive. Since my test said that A is positive, then what is the probability that I have an infection - that the PT-PCR also is positive?</p>
+
+<p>With help from <a href="https://www.investopedia.com/terms/b/bayes-theorem.asp">Bayes Theorem</a> we get the following equation:</p>
+<div>
+$$ P(B|A) = {P(A|B)P(B) \over P(A|B)P(B) + P(A|B^*)P(B^*)} $$
+</div>
+<p>And we set up the following models:</p>
+<div>
+$$ P(A|B) = p \textrm{ and } P(A|B^*) = q $$
+</div>
+<p>To approximate <em>p</em> and <em>q</em> we simple use the lab results displayed on the documentation. We use a binominal distribution from the positive and negative results from the PT-PCR; Bin(435,<em>p</em>) and Bin(628,<em>q</em>).</p>
+<div>
+$$ p^{*}_{obs} = {425 \over 435} \approx 0.977
+\textrm{  and  } 
+q^{*}_{obs} = {1 \over 628} \approx 0.002 $$
+</div>
+<p>Lastly, I will make a guess that 1% of the population has the infection. I could not find any source for a recent approximation but it is not to much of a wild guess. We can now go back and utilize Bayes theorem:</p>
+
+<div>
+$$ P(B|A) = {0.977*0.01 \over 0.977*0.01  + 0.002*0.99 } \approx 0.83$$
+</div>
+
+<p>The conclusion is that there is a 83% risk that I actually got an infection. 
+Notes: If the amount of infection in the population is greater than 1% - the risk would be even higher. At 2% the risk will be about 90%. This makes sense, both by reasoning and by looking at the math.</p>]]></content><author><name></name></author><category term="blog" /><summary type="html"><![CDATA[]]></summary></entry></feed>

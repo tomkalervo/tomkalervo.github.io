@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linear Relaxation for Traveling Salesman Problem (TSP) | Tom Karlsson</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Linear Relaxation for Traveling Salesman Problem (TSP)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Navigating the World of Optimization: A Dive into Linear Relaxation" />
+<meta property="og:description" content="Navigating the World of Optimization: A Dive into Linear Relaxation" />
+<link rel="canonical" href="/blog/2024/02/03/LP-for-TSP.html" />
+<meta property="og:url" content="/blog/2024/02/03/LP-for-TSP.html" />
+<meta property="og:site_name" content="Tom Karlsson" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-02-03T20:37:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linear Relaxation for Traveling Salesman Problem (TSP)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-02-03T20:37:00+00:00","datePublished":"2024-02-03T20:37:00+00:00","description":"Navigating the World of Optimization: A Dive into Linear Relaxation","headline":"Linear Relaxation for Traveling Salesman Problem (TSP)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2024/02/03/LP-for-TSP.html"},"url":"/blog/2024/02/03/LP-for-TSP.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tom Karlsson" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tom Karlsson</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/cv/">CV</a><a class="page-link" href="/my_ml/">My Machine Learning Notes</a><a class="page-link" href="/my_unix/">My Unix Commands</a><a class="page-link" href="/studies/">Studies</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Linear Relaxation for Traveling Salesman Problem (TSP)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-02-03T20:37:00+00:00" itemprop="datePublished">Feb 3, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="navigating-the-world-of-optimization-a-dive-into-linear-relaxation">Navigating the World of Optimization: A Dive into Linear Relaxation</h1>
+
+<p>Fresh from completing a MOOC on <a href="https://www.coursera.org/learn/discrete-optimization">Discrete Optimization</a> offered by Coursera, I find myself equipped with a solid foundation in understanding concepts and techniques for solving optimization problems.</p>
+
+<p>One intriguing technique is Linear Programming (LP). So, in the following blog post, I’ll discuss my insights into leveraging LP for achieving linear relaxation in the context of TSP.</p>
+
+<h2 id="the-tsp-conundrum">The TSP Conundrum</h2>
+
+<p>The Traveling Salesman Problem (TSP), a classic optimization challenge, tasks us with finding the shortest path that visits each node exactly once. This problem is no walk in the park… :D …it’s NP-complete, meaning there’s no guaranteed speedy algorithm to find an optimal solution as the problem size grows.</p>
+
+<h2 id="linear-relaxation-to-the-rescue">Linear Relaxation to the Rescue</h2>
+
+<p>To tackle the complexity of TSP, one approach is to leverage Linear Programming. LP allows us to relax binary constraints on decision variables, allowing real-valued solutions. Though these solutions might not be integers, they serve as an efficient upper bound for the optimization problem.</p>
+
+<h2 id="insights-from-the-implementation">Insights from the Implementation</h2>
+
+<p>In a recent exploration, I delved into implementing an LP-based solution using Google OR-Tools. During the course at coursera I did implement my own LP using the simplex method. But it was more for learning purposes than for actuall usage. The notebook I created walks through the intricacies, from generating a graph to visualizing the obtained solutions. I found this approach not only insightful but also a stepping stone for further refinements.</p>
+
+<p>If you’re curious about the implementation details, branching strategies, and the visualization of the solutions, I invite you to check out the notebook. You can find it <a href="https://github.com/tomkalervo/demos/blob/main/TSP.ipynb">here</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Linear relaxation emerges as a powerful tool in the arsenal of solving combinatorial optimization problems. It not only provides a pragmatic upper bound but also lays the groundwork for iterative improvements. Tackling TSP with LP has been an enlightening journey, and I’m excited to see where this exploration leads next.</p>
+
+<p>Happy optimizing!</p>
+
+  </div><a class="u-url" href="/blog/2024/02/03/LP-for-TSP.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tom Karlsson</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tom Karlsson</li><li><a class="u-email" href="mailto:tom.kg.karlsson@gmail.com">tom.kg.karlsson@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomkalervo</span></a></li><li><a href="https://www.twitter.com/tomkalervo"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">tomkalervo</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Programmer and Data Scientist with BSc in Information Technology.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

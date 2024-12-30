@@ -4,7 +4,7 @@ title: Studies
 permalink: /studies/
 ---
 
-I have a Batchelor of Science Degree at Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
+I have a Bachelor of Science Degree from Kungliga Tekniska Hogskolan (Royal Institute of Technology) in Stockholm, Sweden. 
 
 ### 
 

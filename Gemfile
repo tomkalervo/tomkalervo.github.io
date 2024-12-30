@@ -35,3 +35,8 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 gem "webrick", "~> 1.7"
 
 gem 'liquid', '~> 4.0', '>= 4.0.4'
+gem "faraday-retry", "~> 2.2"
+gem 'csv', '~> 3.3'
+gem 'base64', '~> 0.1.0'
+gem 'bigdecimal', '~> 3.0'
+

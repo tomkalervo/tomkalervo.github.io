@@ -21,7 +21,7 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: jekyll/jekyll-action@v3
+      - uses: actions/jekyll-build-pages@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: 'gh-pages'

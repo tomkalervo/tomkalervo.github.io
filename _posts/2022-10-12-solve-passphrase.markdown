@@ -8,7 +8,6 @@ categories: blog
 Today at the thesis fair I talked to a super cool company called [WSI]. They develop custom solutions from sensor to applications, through all layers of a connected product.
 Anyhow, they had a competition to reverse engineer a passphrase.
 ![passphrase](/assets/img/201210-phassphrase.jpg)
-
 Here is a super fast way to get the secret code using Elixir:
 
 {% highlight elixir %}

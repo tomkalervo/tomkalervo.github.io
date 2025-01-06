@@ -9,6 +9,9 @@ This December, I finally had the time (and patience) to see it through and compl
 Advent of Code (AOC) is a website that celebrates its 10th anniversary this year. Each year, starting on December 1st and running through December 25th, a new challenge is published daily.  
 Some are harder than others, and in general, the difficulty increases with each passing day.
 
+
+You can explore my full solutions to Advent of Code 2024 on GitHub: [Advent of Code 2024](https://github.com/tomkalervo/adventofcode2024/tree/main).  
+
 ![AOC2024](/assets/img/aoc_complete_2024.png)
 
 ## A Bumpy Road  

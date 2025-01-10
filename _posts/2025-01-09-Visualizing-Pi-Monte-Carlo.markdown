@@ -11,8 +11,10 @@ tags: [C++, SDL2, Emscripten, WebAssembly, Monte Carlo]
 Approximating Pi has fascinated mathematicians and programmers alike for centuries. One particularly elegant approach is the **[Monte Carlo method]**, which uses randomness and geometry to estimate this famous constant.
 <div class= "emscripten-border" id="wasm-container" style="text-align: center;">
     <p id="loading-text">Loading the Monte Carlo Pi Visualizer...</p>
-    <canvas class="emscripten" id="canvas"  width="400" height="480" oncontextmenu="event.preventDefault()" ></canvas>
-</div>
+      <div style="display: inline-block; max-width: 100%; width: auto;">
+        <canvas class="emscripten" style="width: 100%; height: auto;" id="canvas"  width="400" height="480" oncontextmenu="event.preventDefault()" ></canvas>
+      </div>
+  </div>
 Recently, I started tinkering with **[SDL2]** — a graphics rendering library written in C. Rendering visuals is an important part of understanding how an algorithm or dataset behaves. It also provides an intuitive way to create user interaction. While understanding graphics rendering concepts can be challenging, it is extremely satisfying once mastered. 
 
 In this post, I'll showcase a program I built with **[SDL2]** to visualize how the [Monte Carlo method] works. The program supports both native builds and WebAssembly, allowing it to run directly in your browser. Users can interact by clicking with the mouse — pausing and resetting the simulation.
